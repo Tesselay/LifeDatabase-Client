@@ -13,6 +13,6 @@ export class ArticleService {
   constructor(private http: HttpClient) { }
 
   getArticles(params: HttpParams) {
-    return this.http.get<Page>(this.url + '/articles', {params: params});
+    return this.http.get<Page>(this.url + '/groceries', {params: params});
   }
 }
