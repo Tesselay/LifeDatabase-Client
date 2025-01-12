@@ -52,7 +52,7 @@ export class ArticlesComponent implements OnInit, AfterViewInit{
   columns: { name: string; label: string; grow: number; cell: (element: Article) => string }[] = [
     {name: 'name', label: 'Name', grow: 1, cell: (element: Article) => `${element.name}`},
     {name: 'content', label: 'Content', grow: 1, cell: (element: Article) => `${element.content}`},
-    {name: 'unit', label: 'Unit', grow: 1, cell: (element: Article) => `${element.unit}`},
+    {name: 'unit', label: 'Unit', grow: 1, cell: (element: Article) => `${element.unit.name}`},
     {name: 'brand', label: 'Brand', grow: 1, cell: (element: Article) => `${element.brand.name}`},
     {name: 'manufacturer', label: 'Manufacturer', grow: 1, cell: (element: Article) => `${element.manufacturer.name}`},
   ]
