@@ -13,7 +13,6 @@ import {MatButton} from '@angular/material/button';
 export class AppComponent {
   title = 'LifeDatabase Client';
   routes: Routes;
-  console: any = console;
 
   constructor(private router: Router) {
     this.routes = this.router.config;
