@@ -66,7 +66,7 @@ export class CompaniesComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit(): void {
-    this.filterCompanies();
+    this.fetchCompanies();
   }
 
   ngAfterViewInit(): void {
@@ -74,21 +74,15 @@ export class CompaniesComponent implements OnInit, AfterViewInit{
       .pipe(
         debounceTime(500)
       )
-      .subscribe(() => {
-        this.page = 0;
-        this.companies = [];
-        this.filterCompanies();
-      });
+      .subscribe(() => this.filterCompanies()
+      );
   }
 
   fetchCompanies() {
     let params = new HttpParams();
 
     Object.keys(this.formControls.controls).forEach((key) => {
-      const value = this.formControls.controls[key].value?.trim();
-      if (value) {
-        params = params.set(key, value);
-      }
+      params = params.set(key, this.formControls.controls[key].value.trim());
     })
 
     params = params.set("size", this.fetchSize);
