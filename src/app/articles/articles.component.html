@@ -1,1 +1,36 @@
-<p>articles works!</p>
+<form class="flex flex-row justify-between items-center" [formGroup]="formControls">
+  <mat-form-field *ngFor="let column of columns" [style.flex-grow]="column.grow" class="mr-3 last:mr-0 w-0">
+    <mat-label>{{ column.label }}</mat-label>
+    <input matInput type="text" [formControlName]="column.name">
+  </mat-form-field>
+  <button mat-flat-button color="warn" (click)="clearFilter()">
+    Clear
+  </button>
+</form>
+
+<app-infinite-scroll (scrolled)="onScroll()" class="overflow-y-scroll block no-scrollbar shadow-md" style="max-height: 85%">
+  <mat-table [dataSource]="articles">
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.name">
+      <mat-header-cell *matHeaderCellDef [style.flex-grow]="column.grow">{{column.name}}</mat-header-cell>
+      <mat-cell *matCellDef="let row" [style.flex-grow]="column.grow">{{column.cell(row)}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="{{displayedColumns[7]}}">
+      <mat-header-cell *matHeaderCellDef [style.flex-grow]="0.1"></mat-header-cell>
+      <mat-cell *matCellDef="let row" [style.flex-grow]="0.1">
+        <button class="flex items-center">
+          <!-- Applied styling directly to icon, since it wasn't working reliably when being applied to button -->
+          <mat-icon class="rounded-full active:shadow-lg transition duration-150 ease-in">more_vert</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="bg-slate-100"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns" class="odd:bg-slate-50"></mat-row>
+
+  </mat-table>
+</app-infinite-scroll>
+
+<div class="flex flex-row justify-center m-3">
+  <span class="text-xl">Ergebnisse: {{ articles.length }} von {{ articleCount }}</span>
+</div>
