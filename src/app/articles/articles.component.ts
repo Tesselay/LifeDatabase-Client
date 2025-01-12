@@ -55,10 +55,15 @@ export class ArticlesComponent implements OnInit, AfterViewInit{
     {name: 'unit', label: 'Unit', grow: 1, cell: (element: Article) => `${element.unit.symbol} (${element.unit.name})`},
     {name: 'brand', label: 'Brand', grow: 1, cell: (element: Article) => `${element.brand.name}`},
     {name: 'manufacturer', label: 'Manufacturer', grow: 1, cell: (element: Article) => `${element.manufacturer.name}`},
+    {name: 'created_at', label: 'Added on', grow: 1, cell: (element: Article) => `${element.createdAt}`}
   ]
   displayedColumns: string[] = this.columns.map(column => column.name);
   formControls: UntypedFormGroup = new UntypedFormGroup({
-    name: new UntypedFormControl('', {nonNullable: true})
+    name: new UntypedFormControl('', {nonNullable: true}),
+    content: new UntypedFormControl('', {nonNullable: true}),
+    unit: new UntypedFormControl('', {nonNullable: true}),
+    brand: new UntypedFormControl('', {nonNullable: true}),
+    manufacturer: new UntypedFormControl('', {nonNullable: true})
   })
   formControlSub!: Subscription;
 
